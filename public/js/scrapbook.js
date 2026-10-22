@@ -33,7 +33,7 @@ function addTag(el,n,skip){ if(skip) return; const t=document.createElement('spa
 
 function renderLetters(){
   const notes=allNotes||[];
-  openBtn.textContent = (dbState==='ready' && notes.length) ? `Read your messages (${notes.length})` : 'Read your messages';
+  openBtn.setAttribute('aria-label', (dbState==='ready' && notes.length) ? `Read your messages (${notes.length})` : 'Read your messages');
   if(!notes.length){
     tiles.forEach(el=>el.remove()); tiles.clear(); bounds=titleBounds();
     boardEmpty.hidden = false;

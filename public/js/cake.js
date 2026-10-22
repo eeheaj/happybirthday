@@ -269,20 +269,17 @@ window.addEventListener('keydown', e=>{ if(app.dataset.view==='home' && e.key===
 window.addEventListener('keyup', e=>{ if(app.dataset.view==='home' && e.key===' ') endHold(); });
 blowBtn.addEventListener('click', e=>e.preventDefault());
 
-const titleEl=document.getElementById('title'), subEl=document.getElementById('sub'), before=document.getElementById('before'), afterUI=document.getElementById('afterUI');
+const before=document.getElementById('before'), afterUI=document.getElementById('afterUI');
 function blowOut(){
   lit=false; holdRing.classList.remove('on'); endHold(); outT=performance.now();
   if(glOK){ flames.forEach((f,fi)=>{ let n=0; for(const p of smoke.parts){ if(p.life<=0 && n<60){ n++; Object.assign(p,{life:1+Math.random()*1.6, max:0, delay:Math.random()*.9, x:f.top.x+(Math.random()-.5)*.02, y:f.top.y+.05, z:f.top.z, vx:(Math.random()-.5)*.08, vy:.35+Math.random()*.3, s:.05+Math.random()*.05}); p.max=p.life; } } }); }
   launchConfetti();
-  titleEl.innerHTML='Happy 52nd birthday, <em>Mom</em>';
-  subEl.textContent='Your wish is on its way. Everyone left you a little something.';
   before.classList.add('gone'); before.inert=true; afterUI.classList.remove('gone');
   setTimeout(()=>{ if(!lit) document.getElementById('openLetters').focus({preventScroll:true}); }, 900);
   setTimeout(()=>{ if(!lit && app.dataset.view==='home' && !board.classList.contains('open')) openBoard(); }, 2600);
 }
 function relight(){
-  lit=true; breath=0; outT=0; titleEl.innerHTML='Make a wish, <em>Mom</em>';
-  subEl.textContent='Fifty-two candles’ worth of love, squeezed into two.';
+  lit=true; breath=0; outT=0;
   before.classList.remove('gone'); before.inert=false; afterUI.classList.add('gone'); blowBtn.focus({preventScroll:true});
 }
 document.getElementById('relight').addEventListener('click', relight);
