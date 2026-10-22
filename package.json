@@ -1,0 +1,16 @@
+{
+  "name": "moms-52nd-birthday",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "node tests/browser.mjs",
+    "test:netlify": "node tests/netlify-smoke.mjs"
+  },
+  "dependencies": { "@netlify/blobs": "^10.5.0", "three": "0.128.0" },
+  "devDependencies": { "netlify-cli": "^23.0.0", "playwright": "^1.56.0" }
+}

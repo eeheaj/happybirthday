@@ -1,0 +1,22 @@
+// Run only against `npm run dev`. These records stay in the local Blobs emulator.
+import assert from 'node:assert/strict';
+import { randomUUID } from 'node:crypto';
+const origin='http://localhost:8888';
+const session=await fetch(origin+'/api/session');
+assert.equal(session.status,200);
+const cookie=session.headers.get('set-cookie').split(';')[0];
+const id=randomUUID();
+const body=JSON.stringify({id,from:'Local deployment check',text:'Netlify Functions and Blobs work together.',image:{kind:'sticker',data:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Wl6p1sAAAAASUVORK5CYII='}});
+const send=()=>fetch(origin+'/api/notes',{method:'POST',headers:{origin,cookie,'content-type':'application/json'},body});
+const result=await send();
+const data=await result.json();
+assert.equal(result.status,201,JSON.stringify(data));
+const repeat=await send();assert.equal(repeat.status,200);
+const mine=await (await fetch(origin+'/api/notes?mine=1',{headers:{cookie}})).json();
+assert.equal(mine.notes.length,1);
+const all=await (await fetch(origin+'/api/notes')).json();assert.ok(all.notes.some(n=>n.id===data.note.id));
+const image=await fetch(origin+'/api/images/'+data.note.img.id);
+assert.equal(image.status,200);assert.equal(image.headers.get('content-type'),'image/png');
+assert.ok((await image.arrayBuffer()).byteLength>0);
+for(const path of ['/','/write','/write/','/vendor/three.min.js']) assert.equal((await fetch(origin+path)).status,200,path);
+console.log('Netlify runtime passed: routes, cookie session, Blobs persistence, retry deduplication, image upload and retrieval.');
