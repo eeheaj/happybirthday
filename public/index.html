@@ -64,27 +64,19 @@
 <!-- ================= NOTE PAGE ================= -->
 <section id="write" aria-label="Leave a note">
   <div class="w-wrap w-head">
-    <svg class="cake-mark" viewBox="0 0 44 44" aria-hidden="true">
-      <rect x="6" y="24" width="32" height="14" rx="3" fill="#F7E9DF"/>
-      <path d="M6 28c4 0 4 4 8 4s4-4 8-4 4 4 8 4 4-4 8-4v-3a3 3 0 0 0-3-3H9a3 3 0 0 0-3 3z" fill="#E2456B"/>
-      <rect x="15" y="12" width="4" height="10" rx="2" fill="#F49AB0"/><rect x="25" y="12" width="4" height="10" rx="2" fill="#F49AB0"/>
-      <path d="M17 5c2 3 2 5 0 6-2-1-2-3 0-6zM27 5c2 3 2 5 0 6-2-1-2-3 0-6z" fill="#FFC56E"/>
-    </svg>
-    <div class="eyebrow">Mom turns 52 &middot; <b>October 22</b></div>
-    <h1>Leave Mom a note</h1>
-    <p>Write whatever you'd say if you were sitting across from her. She'll read it on her birthday page, signed with the name you put in From.</p>
+    <h1>For Mom</h1>
   </div>
   <div class="w-wrap thread" id="thread" aria-live="polite"></div>
   <form class="w-wrap composer" id="composer" autocomplete="off">
     <div class="box" id="box">
-      <div class="from-row"><label for="fromInput">From</label><input id="fromInput" maxlength="60" placeholder="Your name, e.g. Aunt Grace"></div>
+      <div class="from-row"><input id="fromInput" maxlength="60" placeholder="Your name" aria-label="Your name"></div>
       <div class="attach" id="attach" hidden>
         <img id="attachImg" alt="Attached picture">
         <span id="attachLabel">Photo attached</span>
         <button type="button" id="attachRemove">Remove</button>
       </div>
       <div class="msg-row">
-        <textarea id="msgInput" rows="1" maxlength="1500" placeholder="Happy birthday, Mom&hellip;"></textarea>
+        <textarea id="msgInput" rows="1" maxlength="1500" placeholder="Write a little wish&hellip;" aria-label="Your birthday message"></textarea>
         <button class="send" id="sendBtn" type="submit" aria-label="Send note" disabled>
           <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
         </button>
@@ -92,14 +84,13 @@
       <div class="tools">
         <label class="tool" for="fileInput">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg>
-          Photo or sticker
+          Photo
         </label>
         <input type="file" id="fileInput" accept="image/*" hidden>
         <button type="button" class="tool" id="doodleBtn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c3-1 4-3 6-6s4-7 7-9c2-1 3 1 2 3-2 4-8 6-11 10"/></svg>
           Doodle
         </button>
-        <span class="tip" id="pasteTip">or paste a copied sticker</span>
       </div>
     </div>
     <div class="status" id="status" role="status"></div>
@@ -108,7 +99,7 @@
 
 <div class="doodle" id="doodle" hidden role="dialog" aria-modal="true" aria-labelledby="padTitle">
   <div class="pad">
-    <div class="pad-head"><h2 id="padTitle">Draw something for Mom</h2><button type="button" class="tool" id="padUndo">Undo</button></div>
+    <div class="pad-head"><h2 id="padTitle">Doodle</h2><button type="button" class="tool" id="padUndo">Undo</button></div>
     <canvas id="pad" aria-label="Drawing area"></canvas>
     <div class="pad-tools">
       <div class="swatches" id="swatches"></div>
@@ -116,7 +107,7 @@
     </div>
     <div class="pad-actions">
       <button type="button" class="btn ghost" id="padCancel">Cancel</button>
-      <div style="display:flex;gap:8px"><button type="button" class="btn ghost" id="padClear">Clear</button><button type="button" class="btn primary" id="padDone">Attach doodle</button></div>
+      <div style="display:flex;gap:8px"><button type="button" class="btn ghost" id="padClear">Clear</button><button type="button" class="btn primary" id="padDone">Attach</button></div>
     </div>
   </div>
 </div>

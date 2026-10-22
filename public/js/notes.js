@@ -63,7 +63,6 @@ document.addEventListener('paste', e=>{
 ['dragenter','dragover'].forEach(t=>box.addEventListener(t, e=>{ e.preventDefault(); box.classList.add('drop'); }));
 ['dragleave','drop'].forEach(t=>box.addEventListener(t, e=>{ e.preventDefault(); box.classList.remove('drop'); }));
 box.addEventListener('drop', e=>{ const f=e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]; if(f) takeFile(f); });
-if(!window.matchMedia('(pointer:fine)').matches) document.getElementById('pasteTip').textContent='or long-press the message box to paste a sticker';
 
 /* --- doodle pad --- */
 const doodle=document.getElementById('doodle'), pad=document.getElementById('pad'), pctx=pad.getContext('2d');
@@ -112,12 +111,12 @@ window.addEventListener('resize', ()=>{ if(!doodle.hidden){ sizePad(); redrawPad
 function renderThread(){
   thread.textContent='';
   const notes=myNotes;
-  if(!connected && !notes.length){ const s=document.createElement('p'); s.className='sys'; s.textContent = 'Connecting to Mom’s scrapbook…'; thread.appendChild(s); return; }
-  if(!notes.length){ const s=document.createElement('p'); s.className='sys'; s.textContent='Notes you send show up here. Add a photo, a sticker or a doodle and it goes into Mom’s scrapbook.'; thread.appendChild(s); return; }
+  if(!connected && !notes.length){ const s=document.createElement('p'); s.className='sys'; s.textContent = 'Connecting…'; thread.appendChild(s); return; }
+  if(!notes.length) return;
   notes.forEach(n=>{ const b=document.createElement('div'); b.className='bubble';
     if(n.img && n.img.id){ const im=document.createElement('img'); im.src=blobUrl(n.img.id); im.alt='Your picture'; if(n.img.kind!=='photo') im.className='sticker'; b.appendChild(im); }
     if(n.text){ const p=document.createElement('p'); p.textContent=n.text; b.appendChild(p); }
-    const m=document.createElement('div'); m.className='bmeta'; const a=document.createElement('span'); a.textContent=`From ${n.from||''}`; const c=document.createElement('span'); c.textContent=fmtTime(n.at); m.append(a,c);
+    const m=document.createElement('div'); m.className='bmeta'; const a=document.createElement('span'); a.textContent=n.from||''; const c=document.createElement('span'); c.textContent=fmtTime(n.at); m.append(a,c);
     b.appendChild(m); thread.appendChild(b); });
 }
 form.addEventListener('submit', async e=>{
@@ -141,7 +140,7 @@ form.addEventListener('submit', async e=>{
     if(!myNotes.some(n=>n.id===note.id)) myNotes.push(note);
     pendingSubmission=null; renderThread();
     msgInput.value=''; autosize(); setAttachment(null); try{localStorage.removeItem('mom52-draft');}catch(e){}
-    setStatus('Sent. It’s in Mom’s scrapbook now.');
+    setStatus('Sent ♥');
   }catch(err){
     setStatus(err.message || 'That note didn’t send. Check your connection and try again.',true);
   }

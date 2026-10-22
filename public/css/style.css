@@ -112,11 +112,10 @@ h1 em{font-style:normal;color:var(--berry)}
 .v-close{color:var(--ivory-ink);border-color:rgba(58,30,42,.2)!important;background:rgba(255,255,255,.7)!important;position:absolute;top:calc(env(safe-area-inset-top,0px) + 14px);right:max(16px,env(safe-area-inset-right,0px))}
 
 /* ---------- Note page ---------- */
-#write{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;background:
-  radial-gradient(120% 60% at 50% -10%, rgba(226,69,107,.22), transparent 60%), var(--night)}
+#write{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;background:var(--night)}
 .w-wrap{width:100%;max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));box-sizing:border-box}
 .w-head{padding-block:clamp(28px,6vh,56px) 20px;display:grid;gap:10px}
-.w-head h1{font-size:clamp(36px,8vw,56px);max-width:none;text-align:left}
+.w-head h1{font-size:clamp(28px,6vw,38px);max-width:none;text-align:left}
 .w-head p{margin:0;color:var(--muted);max-width:44ch}
 .cake-mark{width:44px;height:44px}
 .thread{flex:1;display:flex;flex-direction:column;gap:12px;padding-block:8px 24px}
